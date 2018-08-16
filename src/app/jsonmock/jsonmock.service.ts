@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import JSONMock from './jsonmock';
 import { HttpClient } from '@angular/common/http';
-import { of  } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
+import JSONMock from './jsonmock';
+import { of } from 'rxjs/internal/observable/of';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable()
 export class JsonmockService {
-  baseURL: string = 'http://localhost:61618/';
-  getPath: string = 'api/mocks';
+  baseURL = 'http://localhost:5050/';
+  getPath = 'api/mocks';
+  postPath = 'api/mocks';
   constructor(private http: HttpClient) { }
 
   getMocks(): Observable<JSONMock[]> {
@@ -16,9 +17,17 @@ export class JsonmockService {
       .pipe(
         tap(mocks => this.log('fetched mocks')),
         catchError(this.handleError('getMocks', []))
-      )
+      );
   }
-  
+
+  createMock(jsonMock: JSONMock): Observable<any | JSONMock> {
+    return this.http.post<JSONMock>(this.baseURL + this.postPath, jsonMock)
+      .pipe(
+        tap(mocks => this.log('fetched mocks')),
+        catchError(this.handleError('getMocks', []))
+      );
+  }
+
   /**
  * Handle Http operation that failed.
  * Let the app continue.

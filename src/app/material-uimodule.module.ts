@@ -1,12 +1,83 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatChipsModule, MatOptionModule, MatGridListModule, MatProgressBarModule, MatSliderModule, MatSlideToggleModule, MatMenuModule, MatDialogModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatSidenavModule, MatCardModule, MatIconModule, MatRadioModule, MatProgressSpinnerModule, MatTabsModule, MatListModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatToolbarModule,
+  MatChipsModule,
+  MatOptionModule,
+  MatGridListModule,
+  MatProgressBarModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatMenuModule,
+  MatDialogModule,
+  MatSnackBarModule,
+  MatSelectModule,
+  MatInputModule,
+  MatSidenavModule,
+  MatCardModule,
+  MatIconModule,
+  MatRadioModule,
+  MatProgressSpinnerModule,
+  MatTabsModule,
+  MatListModule,
+  MatTableModule,
+  MatPaginatorModule
+} from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
 
 @NgModule({
   imports: [
-    MatButtonModule, MatCheckboxModule, MatToolbarModule, MatChipsModule, MatOptionModule, MatGridListModule, MatProgressBarModule, MatSliderModule, MatSlideToggleModule, MatMenuModule, MatDialogModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatSidenavModule, MatCardModule, MatIconModule, MatRadioModule, MatProgressSpinnerModule, MatTabsModule, MatListModule
+    MatButtonModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatChipsModule,
+    MatOptionModule,
+    MatGridListModule,
+    MatProgressBarModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatSelectModule,
+    MatInputModule,
+    MatSidenavModule,
+    MatCardModule,
+    MatIconModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatListModule,
+    MatTableModule,
+    CdkTableModule,
+    MatPaginatorModule
   ],
   exports: [
-    MatButtonModule, MatCheckboxModule, MatToolbarModule, MatChipsModule, MatOptionModule, MatGridListModule, MatProgressBarModule, MatSliderModule, MatSlideToggleModule, MatMenuModule, MatDialogModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatSidenavModule, MatCardModule, MatIconModule, MatRadioModule, MatProgressSpinnerModule, MatTabsModule, MatListModule
-  ],
+    MatButtonModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatChipsModule,
+    MatOptionModule,
+    MatGridListModule,
+    MatProgressBarModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatSelectModule,
+    MatInputModule,
+    MatSidenavModule,
+    MatCardModule,
+    MatIconModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatListModule,
+    MatTableModule,
+    CdkTableModule,
+    MatPaginatorModule
+  ]
 })
 export class MaterialUimoduleModule { }

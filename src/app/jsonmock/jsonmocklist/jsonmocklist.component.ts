@@ -1,4 +1,6 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild } from '@angular/core';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
+
 import { JsonmockService } from '../jsonmock.service';
 import JSONMock from '../jsonmock';
 
@@ -6,10 +8,14 @@ import JSONMock from '../jsonmock';
 @Component({
   selector: 'app-jsonmocklist',
   templateUrl: './jsonmocklist.component.html',
-  styleUrls: ['./jsonmocklist.component.css']
+  styleUrls: ['./jsonmocklist.component.scss']
 })
 export class JsonmocklistComponent implements OnInit {
-  jsonmocks: JSONMock[];
+  displayedColumns: string[] = ['name', 'created_timestamp'];
+  jsonmocks: MatTableDataSource<JSONMock> = null;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private jsonMockService: JsonmockService) { }
 
   ngOnInit() {
@@ -18,6 +24,8 @@ export class JsonmocklistComponent implements OnInit {
 
   getMocks() {
     this.jsonMockService.getMocks()
-      .subscribe(mocks => this.jsonmocks = mocks);
+      .subscribe(mocks => {
+        this.jsonmocks = new MatTableDataSource<JSONMock>(mocks);
+      });
   }
 }

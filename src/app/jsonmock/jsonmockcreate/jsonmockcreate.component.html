@@ -1,0 +1,22 @@
+<form>
+  <mat-form-field>
+    <input 
+      matInput 
+      placeholder="Mock name" 
+      [(ngModel)]="mock.name"
+      name="name" >
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea 
+      matInput 
+      placeholder="Mock template" 
+      [(ngModel)]="mock.template"
+      name="template"></textarea>
+  </mat-form-field>
+  
+  <button 
+    mat-raised-button 
+    color="primary"
+    (click)="saveMock()">Create</button>
+</form>
