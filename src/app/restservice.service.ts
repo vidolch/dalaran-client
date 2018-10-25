@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import JSONMock from './jsonmock';
 import { of } from 'rxjs/internal/observable/of';
 import { Observable } from 'rxjs/internal/Observable';
+import { PaginatedResource } from './paginated-resource';
 
 @Injectable()
-export class JsonmockService {
+export class RestService<T> {
   baseURL = 'http://localhost:5050/';
-  getPath = 'api/mocks';
-  postPath = 'api/mocks';
+  getPath = 'api/';
+  postPath = 'api/';
   constructor(private http: HttpClient) { }
 
-  getMocks(): Observable<JSONMock[]> {
-    return this.http.get<JSONMock[]>(this.baseURL + this.getPath)
+  get(): Observable<PaginatedResource<T>> {
+    return this.http.get<PaginatedResource<T>>(this.baseURL + this.getPath)
       .pipe(
-        tap(mocks => this.log('fetched mocks')),
-        catchError(this.handleError('getMocks', []))
+        tap(resources => this.log('fetched resources')),
+        catchError(this.handleError('get', new PaginatedResource<T>()))
       );
   }
 
-  createMock(jsonMock: JSONMock): Observable<any | JSONMock> {
-    return this.http.post<JSONMock>(this.baseURL + this.postPath, jsonMock)
+  create(model: T): Observable<any | T> {
+    return this.http.post<T>(this.baseURL + this.postPath, model)
       .pipe(
-        tap(mocks => this.log('fetched mocks')),
-        catchError(this.handleError('getMocks', []))
+        tap(resource => this.log('created resource')),
+        catchError(this.handleError('create', []))
       );
   }
 
@@ -34,8 +34,8 @@ export class JsonmockService {
  * @param operation - name of the operation that failed
  * @param result - optional value to return as the observable result
  */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+  private handleError<Td>(operation = 'operation', result?: Td) {
+    return (error: any): Observable<Td> => {
 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
@@ -44,7 +44,7 @@ export class JsonmockService {
       this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
-      return of(result as T);
+      return of(result as Td);
     };
   }
 

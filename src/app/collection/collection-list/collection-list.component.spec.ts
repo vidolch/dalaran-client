@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JsonmockcreateComponent } from './jsonmockcreate.component';
+import { CollectionListComponent } from './collection-list.component';
 
-describe('JsonmockcreateComponent', () => {
-  let component: JsonmockcreateComponent;
-  let fixture: ComponentFixture<JsonmockcreateComponent>;
+describe('CollectionListComponent', () => {
+  let component: CollectionListComponent;
+  let fixture: ComponentFixture<CollectionListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JsonmockcreateComponent ]
+      declarations: [ CollectionListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JsonmockcreateComponent);
+    fixture = TestBed.createComponent(CollectionListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

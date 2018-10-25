@@ -1,6 +1,5 @@
-export default class JSONMock {
+export class Collection {
     name: string;
-    template: string;
     id: string;
 
     created_timestamp: string;

@@ -7,20 +7,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialUimoduleModule } from './material-uimodule.module';
 
 import { AppComponent } from './app.component';
-import { JsonmockComponent } from './jsonmock/jsonmock.component';
-import { JsonmocklistComponent } from './jsonmock/jsonmocklist/jsonmocklist.component';
-import { JsonmockService } from './jsonmock/jsonmock.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { JsonmockcreateComponent } from './jsonmock/jsonmockcreate/jsonmockcreate.component';
 import { FormsModule } from '@angular/forms';
+import { CollectionComponent } from './collection/collection.component';
+import { CollectionListComponent } from './collection/collection-list/collection-list.component';
+import { CollectionService } from './collection/collection.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    JsonmockComponent,
-    JsonmocklistComponent,
-    JsonmockcreateComponent
+    CollectionComponent,
+    CollectionListComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -34,7 +32,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [
-    JsonmockService,
+    CollectionService,
     HttpClient
   ],
   bootstrap: [AppComponent]
