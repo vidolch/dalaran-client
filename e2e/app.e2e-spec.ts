@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('jsonmockify-client App', () => {
+describe('dalaran-client App', () => {
   let page: AppPage;
 
   beforeEach(() => {
