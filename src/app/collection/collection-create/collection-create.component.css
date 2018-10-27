@@ -1,0 +1,15 @@
+.new-collection-form {
+    width: 100%;
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+}
+  
+.name-control {
+    width: 100%;
+}
+.button-control {
+    width: 100px;
+    padding: 10px 15px;
+}

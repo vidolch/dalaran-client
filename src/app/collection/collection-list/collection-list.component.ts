@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CollectionService } from '../collection.service';
-import { Collection } from '../collections';
+import { Collection } from '../collection';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-collection-list',
@@ -8,9 +9,14 @@ import { Collection } from '../collections';
   styleUrls: ['./collection-list.component.css']
 })
 export class CollectionListComponent implements OnInit {
-  collections: Collection[] = null;
+  displayedColumns: string[] = ['name', 'created_timestamp'];
+  dataSource = null;
 
-  constructor(private service: CollectionService) { }
+  constructor(private service: CollectionService) {
+    this.service.changed$.subscribe( changed => {
+      this.getCollections();
+    });
+  }
 
   ngOnInit() {
     this.getCollections();
@@ -19,7 +25,7 @@ export class CollectionListComponent implements OnInit {
   getCollections() {
     this.service.get()
       .subscribe(collections => {
-        this.collections = collections.contents;
+        this.dataSource = new MatTableDataSource<Collection>(collections.contents);
       });
   }
 

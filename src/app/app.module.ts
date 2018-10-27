@@ -12,13 +12,15 @@ import { FormsModule } from '@angular/forms';
 import { CollectionComponent } from './collection/collection.component';
 import { CollectionListComponent } from './collection/collection-list/collection-list.component';
 import { CollectionService } from './collection/collection.service';
+import { CollectionCreateComponent } from './collection/collection-create/collection-create.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CollectionComponent,
-    CollectionListComponent
+    CollectionListComponent,
+    CollectionCreateComponent
   ],
   imports: [
     RouterModule.forRoot(

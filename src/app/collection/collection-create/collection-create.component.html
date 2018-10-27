@@ -1,0 +1,16 @@
+<div>
+  <div *ngIf="!createView">
+      <button mat-raised-button color="primary" (click)="toggleCreateView()">Create new</button>
+  </div>
+  <div *ngIf="createView">
+      <form class="new-collection-form">
+          <mat-form-field class="name-control">
+            <input matInput placeholder="Name" value="" name="name" [(ngModel)]="newCollection.name">
+          </mat-form-field>
+        
+          <div class="button-control">
+              <button matInput mat-raised-button color="primary" (click)="createCollection()">Create</button>
+          </div>
+        </form>
+  </div>
+</div>

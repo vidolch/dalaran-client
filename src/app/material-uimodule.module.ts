@@ -77,7 +77,8 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatListModule,
     MatTableModule,
     CdkTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatInputModule
   ]
 })
 export class MaterialUimoduleModule { }
