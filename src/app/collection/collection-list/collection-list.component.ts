@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./collection-list.component.css']
 })
 export class CollectionListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'created_timestamp'];
+  displayedColumns: string[] = ['name', 'created_timestamp', 'actions'];
   dataSource = null;
 
   constructor(private service: CollectionService) {
@@ -29,4 +29,14 @@ export class CollectionListComponent implements OnInit {
       });
   }
 
+  deleteCollection(id: string) {
+    this.service.delete(id)
+      .subscribe(x => {
+        this.getCollections();
+      });
+  }
+
+  selectForEdit(id: string) {
+    this.service.selectForEdit(id);
+  }
 }

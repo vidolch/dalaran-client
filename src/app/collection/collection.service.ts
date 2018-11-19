@@ -9,13 +9,22 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class CollectionService extends RestService<Collection> {
-  getPath = 'api/collections';
-  postPath = 'api/collections';
+  getPath = 'api/collections/';
+  postPath = 'api/collections/';
+  deletePath = 'api/collections/';
+  updatePath = 'api/collections/';
 
   private changed = new Subject<string>();
   changed$ = this.changed.asObservable();
 
+  private selectedForEdit = new Subject<string>();
+  selectedForEdit$ = this.selectedForEdit.asObservable();
+
   collectionCreated() {
     this.changed.next();
+  }
+
+  selectForEdit(id: string) {
+    this.selectedForEdit.next(id);
   }
 }

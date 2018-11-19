@@ -10,6 +10,8 @@ export class RestService<T> {
   baseURL = 'http://localhost:5050/';
   getPath = 'api/';
   postPath = 'api/';
+  updatePath = 'api/';
+  deletePath = 'api/';
   constructor(private http: HttpClient) { }
 
   get(): Observable<PaginatedResource<T>> {
@@ -20,11 +22,35 @@ export class RestService<T> {
       );
   }
 
+  getOne(id: string): Observable<T> {
+    return this.http.get<T>(this.baseURL + this.getPath + id)
+      .pipe(
+        tap(resource => this.log('fetched resource')),
+        catchError(this.handleError('getOne', {} as T))
+      );
+  }
+
   create(model: T): Observable<any | T> {
     return this.http.post<T>(this.baseURL + this.postPath, model)
       .pipe(
         tap(resource => this.log('created resource')),
         catchError(this.handleError('create', []))
+      );
+  }
+
+  update(id: string, model: T): Observable<any | T> {
+    return this.http.put<T>(this.baseURL + this.updatePath + id, model)
+      .pipe(
+        tap(resource => this.log('updated resource')),
+        catchError(this.handleError('update', []))
+      );
+  }
+
+  delete(id: string): Observable<any | T> {
+    return this.http.delete<T>(this.baseURL + this.deletePath + id)
+      .pipe(
+        tap(resource => this.log('deleted resource')),
+        catchError(this.handleError('delete', []))
       );
   }
 
