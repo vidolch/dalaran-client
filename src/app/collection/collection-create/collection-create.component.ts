@@ -43,6 +43,10 @@ export class CollectionCreateComponent implements OnInit {
     this.createView = false;
   }
 
+  cancelCreate(): any {
+    this.createView = false;
+  }
+
   private selectForEdit(id: string): any {
     this.service.getOne(id)
       .subscribe(model => {

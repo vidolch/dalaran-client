@@ -8,10 +8,23 @@ import { PaginatedResource } from './paginated-resource';
 @Injectable()
 export class RestService<T> {
   baseURL = 'http://localhost:5050/';
-  getPath = 'api/';
-  postPath = 'api/';
-  updatePath = 'api/';
-  deletePath = 'api/';
+
+  public get getPath(): string {
+    return 'api/';
+  }
+
+  public get postPath(): string {
+    return 'api/';
+  }
+
+  public get updatePath(): string {
+    return 'api/';
+  }
+
+  public get deletePath(): string {
+    return 'api/';
+  }
+
   constructor(private http: HttpClient) { }
 
   get(): Observable<PaginatedResource<T>> {

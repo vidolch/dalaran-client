@@ -4,25 +4,26 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { Observable } from 'rxjs/internal/Observable';
 import { RestService } from '../restservice.service';
-import { Collection } from './collection';
+import { Resource } from './resource';
 import { Subject } from 'rxjs';
 
 @Injectable()
-export class CollectionService extends RestService<Collection> {
+export class ResourceService extends RestService<Resource> {
+  collectionId: string = null;
   public get getPath(): string {
-    return 'api/collections/';
+    return `api/collections/${this.collectionId}/resources/`;
   }
 
   public get postPath(): string {
-    return 'api/collections/';
+    return `api/collections/${this.collectionId}/resources/`;
   }
 
   public get updatePath(): string {
-    return 'api/collections/';
+    return `api/collections/${this.collectionId}/resources/`;
   }
 
   public get deletePath(): string {
-    return 'api/collections/';
+    return `api/collections/${this.collectionId}/resources/`;
   }
 
   private changed = new Subject<string>();
@@ -31,7 +32,7 @@ export class CollectionService extends RestService<Collection> {
   private selectedForEdit = new Subject<string>();
   selectedForEdit$ = this.selectedForEdit.asObservable();
 
-  collectionCreated() {
+  resourceCreated() {
     this.changed.next();
   }
 

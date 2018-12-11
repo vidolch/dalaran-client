@@ -1,0 +1,25 @@
+<div>
+    <div *ngIf="!createView">
+        <button mat-raised-button color="primary" (click)="toggleCreateView()">Create new</button>
+    </div>
+    <div *ngIf="createView">
+        <form class="new-resource-form">
+            <mat-form-field class="name-control">
+              <input matInput placeholder="Name" value="" name="name" [(ngModel)]="resource.name">
+            </mat-form-field>
+            <mat-form-field class="name-control">
+              <input matInput placeholder="Path" value="" name="path" [(ngModel)]="resource.path">
+            </mat-form-field>
+          
+            <div class="button-control">
+                <button matInput mat-raised-button color="primary" (click)="submitResource()">
+                    {{ this.isUpdate ? 'Update' : 'Create' }}
+                </button>
+                <button matInput mat-raised-button color="primary" (click)="cancelCreate()">
+                    Cancel
+                </button>
+            </div>
+          </form>
+    </div>
+  </div>
+  

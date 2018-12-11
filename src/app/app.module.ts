@@ -13,6 +13,11 @@ import { CollectionComponent } from './collection/collection.component';
 import { CollectionListComponent } from './collection/collection-list/collection-list.component';
 import { CollectionService } from './collection/collection.service';
 import { CollectionCreateComponent } from './collection/collection-create/collection-create.component';
+import { CollectionDetailsComponent } from './collection/collection-details/collection-details.component';
+import { ResourceListComponent } from './resource/resource-list/resource-list.component';
+import { ResourceService } from './resource/resource.service';
+import { ResourceDetailsComponent } from './resource/resource-details/resource-details.component';
+import { ResourceCreateComponent } from './resource/resource-create/resource-create.component';
 
 
 @NgModule({
@@ -20,7 +25,11 @@ import { CollectionCreateComponent } from './collection/collection-create/collec
     AppComponent,
     CollectionComponent,
     CollectionListComponent,
-    CollectionCreateComponent
+    CollectionCreateComponent,
+    CollectionDetailsComponent,
+    ResourceListComponent,
+    ResourceCreateComponent,
+    ResourceDetailsComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -35,6 +44,7 @@ import { CollectionCreateComponent } from './collection/collection-create/collec
   ],
   providers: [
     CollectionService,
+    ResourceService,
     HttpClient
   ],
   bootstrap: [AppComponent]

@@ -4,7 +4,11 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td mat-cell *matCellDef="let element"> 
+          <a [routerLink]="['/collections/' + element.id]">
+            {{element.name}} 
+          </a>
+      </td>
     </ng-container>
 
     <!-- Created Timestamp Column -->
