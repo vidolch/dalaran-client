@@ -7,14 +7,21 @@
         <mat-icon class="example-icon">build</mat-icon>
       </mat-toolbar-row>
 
-      <mat-toolbar-row>
-        <span>Account</span>
+      <mat-toolbar-row *ngIf="name">
+        <span>{{name}}</span>
         <span class="app-toolbar-filler"></span>
         <mat-icon class="example-icon">account_circle</mat-icon>
       </mat-toolbar-row>
 
-      <mat-toolbar-row>
-        <button mat-raised-button color="accent" class="app-sidebar-button">
+      <mat-toolbar-row *ngIf="name">
+        <button (click)="logout()" mat-raised-button color="accent" class="app-sidebar-button">
+          <mat-icon class="example-icon">verified_user</mat-icon>
+          Logout
+        </button>
+      </mat-toolbar-row>
+
+      <mat-toolbar-row *ngIf="!name">
+        <button (click)="login()" mat-raised-button color="accent" class="app-sidebar-button">
           <mat-icon class="example-icon">verified_user</mat-icon>
           Login
         </button>
