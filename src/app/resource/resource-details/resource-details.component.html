@@ -1,3 +1,10 @@
-<p>
-  resource-details works!
-</p>
+<div>
+  <a [routerLink]="['/collections/' + collectionId]">
+    Collection Parent
+  </a>
+  <div *ngIf="resource">
+    {{resource.name}}
+    <app-request-create [collectionId]="collection.id" [resourceId]="resource.id"></app-request-create>
+    <app-request-list [collectionId]="collection.id" [resourceId]="resource.id"></app-request-list>
+  </div>
+</div>
