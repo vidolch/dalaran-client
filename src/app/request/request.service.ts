@@ -33,7 +33,7 @@ export class RequestService extends RestService<Request> {
   private selectedForEdit = new Subject<string>();
   selectedForEdit$ = this.selectedForEdit.asObservable();
 
-  resourceCreated() {
+  requestsCreated() {
     this.changed.next();
   }
 
