@@ -23,6 +23,7 @@
       <td mat-cell *matCellDef="let element">
         <button mat-raised-button color="primary" (click)="deleteCollection(element.id)">Delete</button>
         <button mat-raised-button color="primary" (click)="selectForEdit(element.id)">Edit</button>
+        <button mat-raised-button color="primary" (click)="downloadApi(element.id)">Download API</button>
       </td>
     </ng-container>
 

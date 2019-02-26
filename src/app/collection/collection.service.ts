@@ -25,11 +25,22 @@ export class CollectionService extends RestService<Collection> {
     return 'api/collections/';
   }
 
+  public get downloadApiPath(): string {
+    return 'api/fake/';
+  }
+
   private changed = new Subject<string>();
   changed$ = this.changed.asObservable();
 
   private selectedForEdit = new Subject<string>();
   selectedForEdit$ = this.selectedForEdit.asObservable();
+
+  downloadApi(id: string): Observable<any> {
+    return this.http.get(this.baseURL + this.downloadApiPath + id, {responseType: 'arraybuffer', observe: 'response'}).pipe(
+      tap(resource => this.log('fetched resource')),
+      catchError(this.handleError('getOne', {} as any))
+    );
+  }
 
   collectionCreated() {
     this.changed.next();

@@ -25,7 +25,7 @@ export class RestService<T> {
     return 'api/';
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(protected http: HttpClient) { }
 
   get(): Observable<PaginatedResource<T>> {
     return this.http.get<PaginatedResource<T>>(this.baseURL + this.getPath)
@@ -73,7 +73,7 @@ export class RestService<T> {
  * @param operation - name of the operation that failed
  * @param result - optional value to return as the observable result
  */
-  private handleError<Td>(operation = 'operation', result?: Td) {
+  protected handleError<Td>(operation = 'operation', result?: Td) {
     return (error: any): Observable<Td> => {
 
       // TODO: send the error to remote logging infrastructure
@@ -87,7 +87,7 @@ export class RestService<T> {
     };
   }
 
-  private log(message: string) {
+  protected log(message: string) {
     console.log(message);
   }
 }
