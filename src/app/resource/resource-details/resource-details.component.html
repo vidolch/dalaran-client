@@ -4,7 +4,7 @@
   </a>
   <div *ngIf="resource">
     {{resource.name}}
-    <app-request-create [collectionId]="collection.id" [resourceId]="resource.id"></app-request-create>
-    <app-request-list [collectionId]="collection.id" [resourceId]="resource.id"></app-request-list>
+    <app-request-create [collectionId]="collectionId" [resourceId]="resource.id"></app-request-create>
+    <app-request-list [collectionId]="collectionId" [resourceId]="resource.id"></app-request-list>
   </div>
 </div>

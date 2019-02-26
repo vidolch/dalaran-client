@@ -1,3 +1,8 @@
-<p>
-  request-details works!
-</p>
+<div>
+  <a [routerLink]="['/collections/' + collectionId + '/resources/' + resourceId]">
+    Resource Parent
+  </a>
+  <div *ngIf="request">
+    {{request.name}}
+  </div>
+</div>

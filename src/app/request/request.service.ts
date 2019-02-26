@@ -12,19 +12,19 @@ export class RequestService extends RestService<Request> {
   collectionId: string = null;
   resourceId: string = null;
   public get getPath(): string {
-    return `api/collections/${this.collectionId}/resources/${this.resourceId}/request`;
+    return `api/collections/${this.collectionId}/resources/${this.resourceId}/requests/`;
   }
 
   public get postPath(): string {
-    return `api/collections/${this.collectionId}/resources/${this.resourceId}/request`;
+    return `api/collections/${this.collectionId}/resources/${this.resourceId}/requests/`;
   }
 
   public get updatePath(): string {
-    return `api/collections/${this.collectionId}/resources/${this.resourceId}/request`;
+    return `api/collections/${this.collectionId}/resources/${this.resourceId}/requests/`;
   }
 
   public get deletePath(): string {
-    return `api/collections/${this.collectionId}/resources/${this.resourceId}/request`;
+    return `api/collections/${this.collectionId}/resources/${this.resourceId}/requests/`;
   }
 
   private changed = new Subject<string>();

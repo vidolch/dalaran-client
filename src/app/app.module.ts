@@ -24,6 +24,7 @@ import { RequestCreateComponent } from './request/request-create/request-create.
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './home/home.component';
+import { RequestService } from './request/request.service';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { HomeComponent } from './home/home.component';
     AuthGuard,
     CollectionService,
     ResourceService,
+    RequestService,
     HttpClient
   ],
   bootstrap: [AppComponent]

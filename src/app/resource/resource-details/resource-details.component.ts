@@ -19,8 +19,8 @@ export class ResourceDetailsComponent implements OnInit {
       this.collectionId = params.collectionId;
       this.http.collectionId = params.collectionId;
 
-      this.http.getOne(params.id).subscribe(collection => {
-        this.resource = collection;
+      this.http.getOne(params.id).subscribe(resource => {
+        this.resource = resource;
       });
     });
   }

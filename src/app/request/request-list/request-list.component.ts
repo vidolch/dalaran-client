@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material';
 export class RequestListComponent implements OnInit {
   @Input() collectionId: string;
   @Input() resourceId: string;
-  displayedColumns: string[] = ['name', 'template', 'http_methods', 'created_timestamp', 'actions'];
+  displayedColumns: string[] = ['name', 'template', 'http_method', 'created_timestamp', 'actions'];
   dataSource = null;
 
   constructor(private service: RequestService) {
@@ -42,5 +42,4 @@ export class RequestListComponent implements OnInit {
   selectForEdit(id: string) {
     this.service.selectForEdit(id);
   }
-
 }
