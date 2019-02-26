@@ -21,11 +21,15 @@ import { ResourceCreateComponent } from './resource/resource-create/resource-cre
 import { RequestListComponent } from './request/request-list/request-list.component';
 import { RequestDetailsComponent } from './request/request-details/request-details.component';
 import { RequestCreateComponent } from './request/request-create/request-create.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { AuthGuard } from './auth.guard';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     CollectionComponent,
     CollectionListComponent,
     CollectionCreateComponent,
@@ -39,16 +43,22 @@ import { RequestCreateComponent } from './request/request-create/request-create.
   ],
   imports: [
     RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true }
+      appRoutes
     ),
     BrowserModule,
     BrowserAnimationsModule,
     MaterialUimoduleModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+          allowedUrls: ['http://localhost:5050'],
+          sendAccessToken: true
+      }
+    })
   ],
   providers: [
+    AuthGuard,
     CollectionService,
     ResourceService,
     HttpClient

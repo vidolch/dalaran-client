@@ -46,7 +46,9 @@ export class AppComponent {
     // Load Discovery Document and then try to login the user
     this.oauthService.loadDiscoveryDocument().then(doc => {
       this.oauthService.tryLogin();
-      this.oauthService.loadUserProfile().then(up => (this.userProfile = up));
+      this.oauthService.loadUserProfile().then(up => {
+        this.userProfile = up;
+      });
     });
 
     this.oauthService.events

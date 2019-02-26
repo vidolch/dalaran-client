@@ -15,4 +15,5 @@ export const authConfig: AuthConfig = {
   // The first three are defined by OIDC. The 4th is a usecase-specific one
   scope: 'openid profile email dalaran_api role',
   responseType: 'id_token token',
+  showDebugInformation: false
 };
