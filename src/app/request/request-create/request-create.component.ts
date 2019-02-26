@@ -1,7 +1,9 @@
+import { HttpMethod } from './../HttpMethod';
 import { Component, OnInit, Input } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Request } from '../request';
 import { MatTableDataSource } from '@angular/material';
+import { HttpMethod } from '../HttpMethod';
 
 @Component({
   selector: 'app-request-create',
@@ -14,6 +16,10 @@ export class RequestCreateComponent implements OnInit {
   request = new Request();
   createView = false;
   isUpdate = false;
+  httpMethods = [
+    HttpMethod.GET,
+    HttpMethod.POST
+  ];
 
   constructor(private service: RequestService) {
     this.service.selectedForEdit$.subscribe( id => {

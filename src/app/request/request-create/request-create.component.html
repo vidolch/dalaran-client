@@ -1,3 +1,31 @@
-<p>
-  request-create works!
-</p>
+<div>
+  <div *ngIf="!createView">
+      <button mat-raised-button color="primary" (click)="toggleCreateView()">Create new</button>
+  </div>
+  <div *ngIf="createView">
+      <form class="new-request-form">
+          <mat-form-field class="name-control">
+            <input matInput placeholder="Name" value="" name="name" [(ngModel)]="request.name">
+          </mat-form-field>
+          <mat-form-field class="template-control">
+            <input matInput placeholder="Template" value="" name="template" [(ngModel)]="request.template">
+          </mat-form-field>
+          <mat-form-field class="http-method-control">
+            <mat-select placeholder="HTTP Method" [(value)]="request.http_method">
+              <mat-option *ngFor="let method of httpMethods" [value]="method">
+                {{method}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+          <div class="button-control">
+              <button matInput mat-raised-button color="primary" (click)="submitRequest()">
+                  {{ this.isUpdate ? 'Update' : 'Create' }}
+              </button>
+              <button matInput mat-raised-button color="primary" (click)="cancelCreate()">
+                  Cancel
+              </button>
+          </div>
+        </form>
+  </div>
+</div>
