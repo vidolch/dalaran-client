@@ -6,6 +6,10 @@ mat-sidenav-container.m2app-dark {
     background: black;
 }
 
+.mat-primary {
+    justify-content: space-between;
+}
+
 .app-content {
     padding: 5px;
 }
@@ -94,4 +98,9 @@ mat-chip {
 
 .example-spacer {
     flex: 1 1 auto;
+}
+
+.title {
+    text-decoration: none;
+    color: white;
 }

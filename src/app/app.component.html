@@ -1,39 +1,25 @@
 <mat-sidenav-container [class.m2app-dark]="isDarkTheme">
-  <mat-sidenav #sidenav mode="over" class="app-sidenav" color="primary">
-    <mat-toolbar>
-      <mat-toolbar-row>
-        <span>Settings</span>
-        <span class="app-toolbar-filler"></span>
-        <mat-icon class="example-icon">build</mat-icon>
-      </mat-toolbar-row>
+  <mat-toolbar color="primary">
+    <a [routerLink]="['/']" class="title">
+      Dalaran
+    </a>
 
-      <mat-toolbar-row *ngIf="name">
-        <span>{{name}}</span>
-        <span class="app-toolbar-filler"></span>
-        <mat-icon class="example-icon">account_circle</mat-icon>
-      </mat-toolbar-row>
-
-      <mat-toolbar-row *ngIf="name">
-        <button (click)="logout()" mat-raised-button color="accent" class="app-sidebar-button">
-          <mat-icon class="example-icon">verified_user</mat-icon>
+    <div class="user-controls">
+      <button mat-button [matMenuTriggerFor]="menu">{{!!name ? name : "Profile"}}</button>
+      <mat-menu #menu="matMenu">      
+        <button *ngIf="name" mat-menu-item>
+          {{name}}
+        </button>
+  
+        <button *ngIf="name" mat-menu-item (click)="logout()">
           Logout
         </button>
-      </mat-toolbar-row>
-
-      <mat-toolbar-row *ngIf="!name">
-        <button (click)="login()" mat-raised-button color="accent" class="app-sidebar-button">
-          <mat-icon class="example-icon">verified_user</mat-icon>
+  
+        <button *ngIf="!name" mat-menu-item (click)="login()">
           Login
         </button>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  </mat-sidenav>
-
-  <mat-toolbar color="primary">
-    <button mat-button class="app-menu-button" (click)="sidenav.toggle()">
-      <i class="material-icons">menu</i>
-    </button>
-    <span class="title">Dalaran</span>
+      </mat-menu>
+    </div>
   </mat-toolbar>
 
   <div class="app-content">
