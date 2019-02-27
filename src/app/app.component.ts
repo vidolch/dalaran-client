@@ -12,6 +12,7 @@ import { filter } from 'rxjs/operators';
 export class AppComponent {
   title = 'app';
   userProfile: object;
+  isDarkTheme = true;
 
   constructor(private oauthService: OAuthService) {
     this.configureWithNewConfigApi();

@@ -1,9 +1,8 @@
 <div>
-  <a [routerLink]="['/collections/']">
-    Collections List
-  </a>
   <div *ngIf="collection">
-    {{collection.name}}
+    <h2>{{collection.name}}</h2>
+    <hr>
+    <h3>Resources</h3>
     <app-resource-create [collectionId]="collection.id"></app-resource-create>
     <app-resource-list [collectionId]="collection.id"></app-resource-list>
   </div>
