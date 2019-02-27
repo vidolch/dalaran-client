@@ -1,4 +1,18 @@
-<div>
-  <app-collection-create></app-collection-create>
-  <app-collection-list></app-collection-list>
-</div>
+<mat-grid-list cols="3" rowHeight="fit" style="min-height: calc(100vh - 124px)" gutterSize="16px">
+  <mat-grid-tile>
+    <div class="tile-body">
+      <app-collection-create></app-collection-create>
+      <app-collection-list (collectionId)="setCollectionDetails($event)"></app-collection-list>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="tile-body">
+      <app-collection-details *ngIf="collectionId" collectionId="{{collectionId}}"></app-collection-details>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="tile-body">
+      Requests
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

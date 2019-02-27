@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CollectionService } from '../collection.service';
 import { Collection } from '../collection';
@@ -9,15 +9,14 @@ import { Collection } from '../collection';
   styleUrls: ['./collection-details.component.css']
 })
 export class CollectionDetailsComponent implements OnInit {
+  @Input() collectionId: string;
   collection: Collection;
   resources: any[];
 
   constructor(private route: ActivatedRoute, private http: CollectionService) {}
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.http.getOne(params.id).subscribe(collection => {
-        this.collection = collection;
-      });
+    this.http.getOne(this.collectionId).subscribe(collection => {
+      this.collection = collection;
     });
   }
 

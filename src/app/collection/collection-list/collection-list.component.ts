@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CollectionService } from '../collection.service';
 import { Collection } from '../collection';
 import { MatTableDataSource } from '@angular/material';
@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./collection-list.component.css']
 })
 export class CollectionListComponent implements OnInit {
+  @Output() collectionId: EventEmitter<string> = new EventEmitter();
   displayedColumns: string[] = ['name', 'created_timestamp', 'actions'];
   dataSource = null;
 
@@ -45,6 +46,10 @@ export class CollectionListComponent implements OnInit {
 
   selectForEdit(id: string) {
     this.service.selectForEdit(id);
+  }
+
+  selectForDetails(id: string) {
+    this.collectionId.emit(id);
   }
 
   private downloadFile(data: any) {

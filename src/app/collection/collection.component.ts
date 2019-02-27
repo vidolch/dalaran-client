@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./collection.component.css']
 })
 export class CollectionComponent implements OnInit {
-
+  collectionId: string;
   constructor() { }
 
   ngOnInit() {
   }
 
+  setCollectionDetails(id: string) {
+    this.collectionId = id;
+  }
 }
