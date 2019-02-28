@@ -1,9 +1,8 @@
 <div>
-  <a [routerLink]="['/collections/' + collectionId]">
-    Collection Parent
-  </a>
   <div *ngIf="resource">
-    {{resource.name}}
+    <h2>{{resource.name}}</h2>
+    <hr>
+    <h3>Requests</h3>
     <app-request-create [collectionId]="collectionId" [resourceId]="resource.id"></app-request-create>
     <app-request-list [collectionId]="collectionId" [resourceId]="resource.id"></app-request-list>
   </div>

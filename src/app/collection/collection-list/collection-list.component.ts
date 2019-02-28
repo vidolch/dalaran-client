@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { CollectionService } from '../collection.service';
 import { Collection } from '../collection';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-collection-list',
@@ -13,10 +13,24 @@ export class CollectionListComponent implements OnInit, OnChanges {
   displayedColumns: string[] = ['name', 'created_timestamp', 'actions'];
   dataSource = null;
 
+  // MatPaginator Inputs
+  length = 100;
+  pageIndex = 0;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
   constructor(private service: CollectionService) {
     this.service.changed$.subscribe( changed => {
       this.getCollections();
     });
+  }
+
+  // MatPaginator Output
+  pageEvent: PageEvent;
+
+  setPage(page: PageEvent) {
+    this.pageEvent = page;
+    this.getCollections();
   }
 
   ngOnInit() {
@@ -28,9 +42,15 @@ export class CollectionListComponent implements OnInit, OnChanges {
   }
 
   getCollections() {
-    this.service.get()
+    let paging = null;
+    if (this.pageEvent) {
+      paging = { page: this.pageEvent.pageIndex + 1, size: this.pageEvent.pageSize };
+    }
+
+    this.service.get(paging)
       .subscribe(collections => {
         this.dataSource = new MatTableDataSource<Collection>(collections.contents);
+        this.length = collections.total_size;
       });
   }
 

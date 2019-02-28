@@ -1,3 +1,21 @@
 .tile-body {
     width: 100%;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+/* Column Gap */
+.row > * {
+    box-sizing: border-box;
+}
+.row > *:not(:last-child) {
+    margin-right: 15px;
+}
+/* Item sizing */
+.col {
+    flex: 0 1 calc(33.3% - 15px);
+}

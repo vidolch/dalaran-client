@@ -27,8 +27,18 @@ export class RestService<T> {
 
   constructor(protected http: HttpClient) { }
 
-  get(): Observable<PaginatedResource<T>> {
-    return this.http.get<PaginatedResource<T>>(this.baseURL + this.getPath)
+  get(params: object = null): Observable<PaginatedResource<T>> {
+    let queryParams = '';
+    if (params) {
+      queryParams += '?';
+      for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+          queryParams += `${key}=${params[key]}&`;
+        }
+      }
+      queryParams = queryParams.substring(0, queryParams.length - 1);
+    }
+    return this.http.get<PaginatedResource<T>>(this.baseURL + this.getPath + queryParams)
       .pipe(
         tap(resources => this.log('fetched resources')),
         catchError(this.handleError('get', new PaginatedResource<T>()))
