@@ -9,7 +9,7 @@ import { AddCollectionEvent } from '../events/add-collection.event';
   templateUrl: './collection-create.component.html',
   styleUrls: ['./collection-create.component.css']
 })
-export class CollectionCreateComponent implements OnInit {
+export class CollectionCreateComponent {
   collection = new Collection();
   createView = false;
   isUpdate = false;
@@ -18,9 +18,6 @@ export class CollectionCreateComponent implements OnInit {
     this.service.selectedForEdit$.subscribe( id => {
       this.selectForEdit(id);
     });
-  }
-
-  ngOnInit() {
   }
 
   toggleCreateView() {

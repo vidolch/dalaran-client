@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Request } from '../request';
 import { MatTableDataSource } from '@angular/material';
@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material';
   templateUrl: './request-list.component.html',
   styleUrls: ['./request-list.component.css']
 })
-export class RequestListComponent implements OnInit {
+export class RequestListComponent implements OnChanges, OnInit {
   @Input() collectionId: string;
   @Input() resourceId: string;
   displayedColumns: string[] = ['name', 'template', 'http_method', 'created_timestamp', 'actions'];
@@ -21,6 +21,12 @@ export class RequestListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.service.collectionId = this.collectionId;
+    this.service.resourceId = this.resourceId;
+    this.getRequests();
+  }
+
+  ngOnChanges() {
     this.service.collectionId = this.collectionId;
     this.service.resourceId = this.resourceId;
     this.getRequests();

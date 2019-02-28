@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { CollectionService } from '../collection.service';
 import { Collection } from '../collection';
 import { MatTableDataSource } from '@angular/material';
@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material';
   templateUrl: './collection-list.component.html',
   styleUrls: ['./collection-list.component.css']
 })
-export class CollectionListComponent implements OnInit {
+export class CollectionListComponent implements OnInit, OnChanges {
   @Output() collectionId: EventEmitter<string> = new EventEmitter();
   displayedColumns: string[] = ['name', 'created_timestamp', 'actions'];
   dataSource = null;
@@ -20,6 +20,10 @@ export class CollectionListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCollections();
+  }
+
+  ngOnChanges() {
     this.getCollections();
   }
 

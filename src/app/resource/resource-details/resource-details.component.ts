@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Resource } from '../Resource';
 import { ActivatedRoute } from '@angular/router';
 import { ResourceService } from '../resource.service';
@@ -8,20 +8,28 @@ import { ResourceService } from '../resource.service';
   templateUrl: './resource-details.component.html',
   styleUrls: ['./resource-details.component.css']
 })
-export class ResourceDetailsComponent implements OnInit {
+export class ResourceDetailsComponent implements OnInit, OnChanges {
+  @Input() collectionId: string;
+  @Input() resourceId: string;
   resource: Resource;
-  collectionId: string;
 
   constructor(private route: ActivatedRoute, private http: ResourceService) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.collectionId = params.collectionId;
-      this.http.collectionId = params.collectionId;
+    this.collectionId = this.collectionId;
+    this.http.collectionId = this.collectionId;
 
-      this.http.getOne(params.id).subscribe(resource => {
-        this.resource = resource;
-      });
+    this.http.getOne(this.resourceId).subscribe(resource => {
+      this.resource = resource;
+    });
+  }
+
+  ngOnChanges() {
+    this.collectionId = this.collectionId;
+    this.http.collectionId = this.collectionId;
+
+    this.http.getOne(this.resourceId).subscribe(resource => {
+      this.resource = resource;
     });
   }
 

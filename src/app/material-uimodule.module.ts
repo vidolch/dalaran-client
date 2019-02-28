@@ -24,7 +24,7 @@ import {
   MatTableModule,
   MatPaginatorModule
 } from '@angular/material';
-import { CdkTableModule } from '@angular/cdk/table';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -50,8 +50,8 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatTabsModule,
     MatListModule,
     MatTableModule,
-    CdkTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FlexLayoutModule
   ],
   exports: [
     MatButtonModule,
@@ -76,7 +76,6 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatTabsModule,
     MatListModule,
     MatTableModule,
-    CdkTableModule,
     MatPaginatorModule,
     MatInputModule
   ]

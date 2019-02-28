@@ -14,14 +14,14 @@ export const appRoutes: Routes = [
       data: { title: 'Collections' }
     },
     {
-      path: 'collections/:id',
-      component: CollectionDetailsComponent,
+      path: 'collections/:collectionId',
+      component: CollectionComponent,
       canActivate: [AuthGuard],
       data: { title: 'Collection Details' }
     },
     {
-      path: 'collections/:collectionId/resources/:id',
-      component: ResourceDetailsComponent,
+      path: 'collections/:collectionId/resources/:resourceId',
+      component: CollectionComponent,
       canActivate: [AuthGuard],
       data: { title: 'Resource details' }
     },

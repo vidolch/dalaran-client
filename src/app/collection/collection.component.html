@@ -7,12 +7,12 @@
   </mat-grid-tile>
   <mat-grid-tile>
     <div class="tile-body">
-      <app-collection-details *ngIf="collectionId" collectionId="{{collectionId}}"></app-collection-details>
+      <app-collection-details *ngIf="collectionId" collectionId="{{collectionId}}" (resourceId)="setResourceDetails($event)"></app-collection-details>
     </div>
   </mat-grid-tile>
   <mat-grid-tile>
     <div class="tile-body">
-      Requests
+      <app-resource-details *ngIf="resourceId && collectionId" collectionId="{{collectionId}}" resourceId="{{resourceId}}"></app-resource-details>
     </div>
   </mat-grid-tile>
 </mat-grid-list>

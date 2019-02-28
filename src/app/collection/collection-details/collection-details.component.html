@@ -4,6 +4,6 @@
     <hr>
     <h3>Resources</h3>
     <app-resource-create [collectionId]="collection.id"></app-resource-create>
-    <app-resource-list [collectionId]="collection.id"></app-resource-list>
+    <app-resource-list [collectionId]="collection.id" (resourceId)="setResourceDetails($event)"></app-resource-list>
   </div>
 </div>

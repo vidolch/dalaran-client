@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Resource } from '../Resource';
 import { MatTableDataSource } from '@angular/material';
 import { ResourceService } from '../resource.service';
@@ -8,8 +8,9 @@ import { ResourceService } from '../resource.service';
   templateUrl: './resource-list.component.html',
   styleUrls: ['./resource-list.component.css']
 })
-export class ResourceListComponent implements OnInit {
+export class ResourceListComponent implements OnInit, OnChanges {
   @Input() collectionId: string;
+  @Output() resourceId: EventEmitter<string> = new EventEmitter();
   displayedColumns: string[] = ['name', 'path', 'created_timestamp', 'actions'];
   dataSource = null;
 
@@ -20,6 +21,11 @@ export class ResourceListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.service.collectionId = this.collectionId;
+    this.getResources();
+  }
+
+  ngOnChanges() {
     this.service.collectionId = this.collectionId;
     this.getResources();
   }
@@ -39,5 +45,9 @@ export class ResourceListComponent implements OnInit {
 
   selectForEdit(id: string) {
     this.service.selectForEdit(id);
+  }
+
+  selectForDetails(id: string) {
+    this.resourceId.emit(id);
   }
 }
