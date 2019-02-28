@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material';
 export class RequestListComponent implements OnChanges, OnInit {
   @Input() collectionId: string;
   @Input() resourceId: string;
-  displayedColumns: string[] = ['name', 'template', 'http_method', 'created_timestamp', 'actions'];
+  displayedColumns: string[] = ['name', 'http_method', 'created_timestamp', 'actions'];
   dataSource = null;
 
   constructor(private service: RequestService) {
