@@ -42,7 +42,6 @@ export class AppComponent {
   private configureWithNewConfigApi() {
     this.oauthService.configure(authConfig);
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
 
     // Load Discovery Document and then try to login the user
     this.oauthService.loadDiscoveryDocument().then(doc => {
@@ -51,6 +50,8 @@ export class AppComponent {
         this.userProfile = up;
       });
     });
+
+    this.oauthService.setupAutomaticSilentRefresh();
 
     this.oauthService.events
       .pipe(filter(e => e.type === 'token_expires'))

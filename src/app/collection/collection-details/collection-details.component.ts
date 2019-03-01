@@ -1,7 +1,8 @@
+import { ResourceCreateComponent } from './../../resource/resource-create/resource-create.component';
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { CollectionService } from '../collection.service';
 import { Collection } from '../collection';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-collection-details',
@@ -14,7 +15,9 @@ export class CollectionDetailsComponent implements OnInit, OnChanges {
   collection: Collection;
   resources: any[];
 
-  constructor(private route: ActivatedRoute, private http: CollectionService) {}
+  constructor(
+    private http: CollectionService,
+    public dialog: MatDialog) {}
   ngOnChanges() {
     this.http.getOne(this.collectionId).subscribe(collection => {
       this.collection = collection;
@@ -29,5 +32,13 @@ export class CollectionDetailsComponent implements OnInit, OnChanges {
 
   setResourceDetails(id: string) {
     this.resourceId.emit(id);
+  }
+
+  openCreateDialog() {
+    this.dialog.open(ResourceCreateComponent, {
+      data: {
+        CollectionId: this.collectionId
+      }
+    });
   }
 }

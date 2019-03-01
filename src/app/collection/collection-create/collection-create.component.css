@@ -13,3 +13,7 @@
     width: 100px;
     padding: 10px 15px;
 }
+
+input {
+    width: 100%;
+}

@@ -65,6 +65,11 @@ import { RequestService } from './request/request.service';
     RequestService,
     HttpClient
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    CollectionCreateComponent,
+    ResourceCreateComponent,
+    RequestCreateComponent
+  ]
 })
 export class AppModule { }

@@ -3,7 +3,7 @@
     <h2>{{resource.name}}</h2>
     <hr>
     <h3>Requests</h3>
-    <app-request-create [collectionId]="collectionId" [resourceId]="resource.id"></app-request-create>
-    <app-request-list [collectionId]="collectionId" [resourceId]="resource.id"></app-request-list>
+    <button matInput mat-raised-button color="primary" (click)="openCreateDialog()">Create new</button>
+    <app-request-list [collectionId]="collectionId" [resourceId]="resourceId"></app-request-list>
   </div>
 </div>

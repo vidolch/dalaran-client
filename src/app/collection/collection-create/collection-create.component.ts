@@ -1,8 +1,7 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Collection } from '../collection';
 import { CollectionService } from '../collection.service';
-import { EventEmitter } from 'events';
-import { AddCollectionEvent } from '../events/add-collection.event';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-collection-create',
@@ -11,44 +10,37 @@ import { AddCollectionEvent } from '../events/add-collection.event';
 })
 export class CollectionCreateComponent {
   collection = new Collection();
-  createView = false;
   isUpdate = false;
 
-  constructor(private service: CollectionService) {
-    this.service.selectedForEdit$.subscribe( id => {
+  constructor(
+    private service: CollectionService,
+    public dialogRef: MatDialogRef<CollectionCreateComponent>,
+    @Inject(MAT_DIALOG_DATA) public id: string) {
+    if (id) {
       this.selectForEdit(id);
-    });
-  }
-
-  toggleCreateView() {
-    this.createView = true;
+    }
   }
 
   submitCollection() {
     if (!this.isUpdate) {
-      this.service.create(this.collection).subscribe(model => {
+      this.service.create(this.collection).subscribe(() => {
         this.collection = new Collection();
         this.service.collectionCreated();
       });
     } else {
-      this.service.update(this.collection.id, this.collection).subscribe(model => {
+      this.service.update(this.collection.id, this.collection).subscribe(() => {
         this.collection = new Collection();
         this.service.collectionCreated();
       });
       this.isUpdate = false;
     }
-    this.createView = false;
-  }
-
-  cancelCreate(): any {
-    this.createView = false;
+    this.dialogRef.close();
   }
 
   private selectForEdit(id: string): any {
     this.service.getOne(id)
       .subscribe(model => {
         this.collection = model;
-        this.createView = true;
         this.isUpdate = true;
       });
   }

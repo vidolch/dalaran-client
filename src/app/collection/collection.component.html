@@ -3,7 +3,7 @@
     <div class="tile-body">
       <h2>All Collections</h2>
       <hr>
-      <app-collection-create></app-collection-create>
+      <button matInput mat-raised-button color="primary" (click)="openCreateDialog()">Create new</button>
       <app-collection-list (collectionId)="setCollectionDetails($event)"></app-collection-list>
     </div>
   </div>

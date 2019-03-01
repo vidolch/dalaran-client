@@ -1,7 +1,8 @@
+import { RequestCreateComponent } from './../request-create/request-create.component';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Request } from '../request';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-request-list',
@@ -14,7 +15,9 @@ export class RequestListComponent implements OnChanges, OnInit {
   displayedColumns: string[] = ['name', 'http_method', 'created_timestamp', 'actions'];
   dataSource = null;
 
-  constructor(private service: RequestService) {
+  constructor(
+    private service: RequestService,
+    public dialog: MatDialog) {
     this.service.changed$.subscribe( changed => {
       this.getRequests();
     });
@@ -46,6 +49,12 @@ export class RequestListComponent implements OnChanges, OnInit {
   }
 
   selectForEdit(id: string) {
-    this.service.selectForEdit(id);
+    this.dialog.open(RequestCreateComponent, {
+      data: {
+        ResourceId: this.resourceId,
+        CollectionId: this.collectionId,
+        Id: id
+      }
+    });
   }
 }

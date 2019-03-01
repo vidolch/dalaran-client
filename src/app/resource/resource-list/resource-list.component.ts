@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Resource } from '../Resource';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 import { ResourceService } from '../resource.service';
+import { ResourceCreateComponent } from '../resource-create/resource-create.component';
 
 @Component({
   selector: 'app-resource-list',
@@ -14,7 +15,9 @@ export class ResourceListComponent implements OnInit, OnChanges {
   displayedColumns: string[] = ['name', 'path', 'created_timestamp', 'actions'];
   dataSource = null;
 
-  constructor(private service: ResourceService) {
+  constructor(
+    private service: ResourceService,
+    public dialog: MatDialog) {
     this.service.changed$.subscribe( changed => {
       this.getResources();
     });
@@ -44,7 +47,12 @@ export class ResourceListComponent implements OnInit, OnChanges {
   }
 
   selectForEdit(id: string) {
-    this.service.selectForEdit(id);
+    this.dialog.open(ResourceCreateComponent, {
+      data: {
+        CollectionId: this.collectionId,
+        Id: id
+      }
+    });
   }
 
   selectForDetails(id: string) {

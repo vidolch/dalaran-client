@@ -1,6 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
+import { MatDialog } from '@angular/material';
+import { CollectionCreateComponent } from './collection-create/collection-create.component';
 
 @Component({
   selector: 'app-collection',
@@ -10,7 +12,10 @@ import {Location} from '@angular/common';
 export class CollectionComponent implements OnInit {
   collectionId: string;
   resourceId: string;
-  constructor(private route: ActivatedRoute, private location: Location, private cdr: ChangeDetectorRef) { }
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -21,14 +26,15 @@ export class CollectionComponent implements OnInit {
 
   setCollectionDetails(id: string) {
     this.collectionId = id;
-    this.resourceId = null;
     this.location.replaceState(`/collections/${id}`);
-    this.cdr.detectChanges();
   }
 
   setResourceDetails(id: string) {
     this.resourceId = id;
     this.location.replaceState(`/collections/${this.collectionId}/resources/${id}`);
-    this.cdr.detectChanges();
+  }
+
+  openCreateDialog() {
+    this.dialog.open(CollectionCreateComponent);
   }
 }

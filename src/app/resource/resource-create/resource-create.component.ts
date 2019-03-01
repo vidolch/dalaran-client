@@ -1,30 +1,33 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Resource } from '../Resource';
 import { ResourceService } from '../resource.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+
+interface ResourceCreateData {
+  CollectionId: string;
+  Id?: string;
+}
 
 @Component({
   selector: 'app-resource-create',
   templateUrl: './resource-create.component.html',
   styleUrls: ['./resource-create.component.css']
 })
-export class ResourceCreateComponent implements OnInit {
-  @Input() collectionId: string;
+export class ResourceCreateComponent {
   resource = new Resource();
-  createView = false;
   isUpdate = false;
 
-  constructor(private service: ResourceService) {
-    this.service.selectedForEdit$.subscribe( id => {
-      this.selectForEdit(id);
-    });
-  }
+  constructor(
+    private service: ResourceService,
+    public dialogRef: MatDialogRef<ResourceCreateComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ResourceCreateData) {
+    if (data) {
+      this.service.collectionId = data.CollectionId;
 
-  ngOnInit() {
-    this.service.collectionId = this.collectionId;
-  }
-
-  toggleCreateView() {
-    this.createView = true;
+      if (data.Id) {
+        this.selectForEdit(data.Id);
+      }
+    }
   }
 
   submitResource() {
@@ -40,18 +43,13 @@ export class ResourceCreateComponent implements OnInit {
       });
       this.isUpdate = false;
     }
-    this.createView = false;
-  }
-
-  cancelCreate(): any {
-    this.createView = false;
+    this.dialogRef.close();
   }
 
   private selectForEdit(id: string): any {
     this.service.getOne(id)
       .subscribe(model => {
         this.resource = model;
-        this.createView = true;
         this.isUpdate = true;
       });
   }

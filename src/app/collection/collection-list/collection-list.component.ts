@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 import { CollectionService } from '../collection.service';
 import { Collection } from '../collection';
-import { MatTableDataSource, PageEvent } from '@angular/material';
+import { MatTableDataSource, PageEvent, MatDialog } from '@angular/material';
+import { CollectionCreateComponent } from '../collection-create/collection-create.component';
 
 @Component({
   selector: 'app-collection-list',
@@ -19,7 +20,9 @@ export class CollectionListComponent implements OnInit, OnChanges {
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
 
-  constructor(private service: CollectionService) {
+  constructor(
+    private service: CollectionService,
+    public dialog: MatDialog) {
     this.service.changed$.subscribe( changed => {
       this.getCollections();
     });
@@ -69,7 +72,9 @@ export class CollectionListComponent implements OnInit, OnChanges {
   }
 
   selectForEdit(id: string) {
-    this.service.selectForEdit(id);
+    this.dialog.open(CollectionCreateComponent, {
+      data: id
+    });
   }
 
   selectForDetails(id: string) {
