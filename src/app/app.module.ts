@@ -69,7 +69,8 @@ import { RequestService } from './request/request.service';
   entryComponents: [
     CollectionCreateComponent,
     ResourceCreateComponent,
-    RequestCreateComponent
+    RequestCreateComponent,
+    RequestDetailsComponent
   ]
 })
 export class AppModule { }

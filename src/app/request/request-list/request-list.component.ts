@@ -3,6 +3,7 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Request } from '../request';
 import { MatTableDataSource, MatDialog } from '@angular/material';
+import { RequestDetailsComponent } from '../request-details/request-details.component';
 
 @Component({
   selector: 'app-request-list',
@@ -50,6 +51,16 @@ export class RequestListComponent implements OnChanges, OnInit {
 
   selectForEdit(id: string) {
     this.dialog.open(RequestCreateComponent, {
+      data: {
+        ResourceId: this.resourceId,
+        CollectionId: this.collectionId,
+        Id: id
+      }
+    });
+  }
+
+  openDetailsDialog(id: string) {
+    this.dialog.open(RequestDetailsComponent, {
       data: {
         ResourceId: this.resourceId,
         CollectionId: this.collectionId,

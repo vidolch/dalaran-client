@@ -1,8 +1,8 @@
-<div>
-  <a [routerLink]="['/collections/' + collectionId + '/resources/' + resourceId]">
-    Resource Parent
-  </a>
-  <div *ngIf="request">
-    {{request.name}}
-  </div>
+<div *ngIf="request">
+  <h2>{{request.name}}</h2>
+  <hr>
+  <h3>HTTP Method - {{request.http_method}}</h3>
+  <code>
+    {{request.template}}
+  </code>
 </div>
