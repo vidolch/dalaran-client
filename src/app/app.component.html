@@ -1,4 +1,5 @@
 <mat-sidenav-container [class.m2app-dark]="isDarkTheme">
+  <app-loader></app-loader>
   <mat-toolbar color="primary">
     <a [routerLink]="['/']" class="title">
       Dalaran
@@ -7,15 +8,15 @@
     <div class="user-controls">
       <button mat-button [matMenuTriggerFor]="menu">{{!!name ? name : "Profile"}}</button>
       <mat-menu #menu="matMenu">      
-        <button *ngIf="name" mat-menu-item>
+        <button *ngIf="username" mat-menu-item>
           {{name}}
         </button>
   
-        <button *ngIf="name" mat-menu-item (click)="logout()">
+        <button *ngIf="username" mat-menu-item (click)="logout()">
           Logout
         </button>
   
-        <button *ngIf="!name" mat-menu-item (click)="login()">
+        <button *ngIf="!username" mat-menu-item (click)="login()">
           Login
         </button>
       </mat-menu>

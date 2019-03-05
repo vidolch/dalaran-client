@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
-import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
-import { authConfig } from './auth.config';
-import { filter } from 'rxjs/operators';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,51 +11,17 @@ export class AppComponent {
   userProfile: object;
   isDarkTheme = true;
 
-  constructor(private oauthService: OAuthService) {
-    this.configureWithNewConfigApi();
-  }
-
-  loadUserProfile(): void {
-    this.oauthService.loadUserProfile().then(up => (this.userProfile = up));
-  }
+  constructor(private authService: AuthService) {}
 
   public login() {
-      this.oauthService.initImplicitFlow();
+    this.authService.startAuthentication();
   }
 
   public logout() {
-      this.oauthService.logOut();
+      this.authService.logOut();
   }
 
-  public get name() {
-      const claims: object = this.oauthService.getIdentityClaims();
-      if (!claims) {
-        return null;
-      }
-
-      return claims['preferred_username'];
-  }
-
-  private configureWithNewConfigApi() {
-    this.oauthService.configure(authConfig);
-    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-
-    // Load Discovery Document and then try to login the user
-    this.oauthService.loadDiscoveryDocument().then(doc => {
-      this.oauthService.tryLogin();
-      this.oauthService.loadUserProfile().then(up => {
-        this.userProfile = up;
-      });
-    });
-
-    this.oauthService.setupAutomaticSilentRefresh();
-
-    this.oauthService.events
-      .pipe(filter(e => e.type === 'token_expires'))
-      .subscribe(e => {
-        // tslint:disable-next-line:no-console
-        console.debug('received token_expires event', e);
-        this.oauthService.silentRefresh();
-      });
+  public get username() {
+      return this.authService.isLoggedIn() ? this.authService.getClaims()['preferred_username'] : null;
   }
 }

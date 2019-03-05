@@ -2,9 +2,8 @@ import { RequestDetailsComponent } from './request/request-details/request-detai
 import { HomeComponent } from './home/home.component';
 import { Routes } from '@angular/router';
 import { CollectionComponent } from './collection/collection.component';
-import { CollectionDetailsComponent } from './collection/collection-details/collection-details.component';
-import { ResourceDetailsComponent } from './resource/resource-details/resource-details.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './auth/auth.guard';
+import { LogincallbackComponent } from './common/login-callback/login-callback.component';
 
 export const appRoutes: Routes = [
     {
@@ -30,6 +29,11 @@ export const appRoutes: Routes = [
       component: RequestDetailsComponent,
       canActivate: [AuthGuard],
       data: { title: 'Resource details' }
+    },
+    {
+      path: 'callback.html',
+      component: LogincallbackComponent,
+      data: { title: 'Collections' }
     },
     { path: '**', component: HomeComponent }
   ];

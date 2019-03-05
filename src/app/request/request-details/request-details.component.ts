@@ -33,7 +33,9 @@ export class RequestDetailsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.getRequest();
+    setTimeout(() => {
+      this.getRequest();
+    });
   }
 
   ngOnChanges() {

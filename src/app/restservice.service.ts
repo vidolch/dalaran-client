@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { Observable } from 'rxjs/internal/Observable';
 import { PaginatedResource } from './paginated-resource';
+import { AuthService } from './auth/auth.service';
 
 @Injectable()
 export class RestService<T> {
@@ -25,9 +26,11 @@ export class RestService<T> {
     return 'api/';
   }
 
-  constructor(protected http: HttpClient) { }
+  constructor(protected http: HttpClient, private authService: AuthService) { }
 
   get(params: object = null): Observable<PaginatedResource<T>> {
+    const headers = new HttpHeaders({ 'Authorization': this.authService.getAuthorizationHeaderValue() });
+
     let queryParams = '';
     if (params) {
       queryParams += '?';
@@ -38,7 +41,7 @@ export class RestService<T> {
       }
       queryParams = queryParams.substring(0, queryParams.length - 1);
     }
-    return this.http.get<PaginatedResource<T>>(this.baseURL + this.getPath + queryParams)
+    return this.http.get<PaginatedResource<T>>(this.baseURL + this.getPath + queryParams, { headers: headers })
       .pipe(
         tap(resources => this.log('fetched resources')),
         catchError(this.handleError('get', new PaginatedResource<T>()))
