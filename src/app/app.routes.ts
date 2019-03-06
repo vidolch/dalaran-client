@@ -3,7 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { Routes } from '@angular/router';
 import { CollectionComponent } from './collection/collection.component';
 import { AuthGuard } from './auth/auth.guard';
-import { LogincallbackComponent } from './common/login-callback/login-callback.component';
+import { LogincallbackComponent } from './shared/login-callback/login-callback.component';
 
 export const appRoutes: Routes = [
     {

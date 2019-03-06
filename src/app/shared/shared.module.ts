@@ -1,3 +1,4 @@
+import { KeysPipe } from './keys.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LoaderComponent } from './loader/loader.component';
@@ -8,14 +9,16 @@ import { LogincallbackComponent } from './login-callback/login-callback.componen
 @NgModule({
     declarations: [
         LoaderComponent,
-        LogincallbackComponent
+        LogincallbackComponent,
+        KeysPipe
     ],
     imports: [
         BrowserModule
     ],
     exports: [
         LoaderComponent,
-        LogincallbackComponent
+        LogincallbackComponent,
+        KeysPipe
     ],
     providers: [
     {
@@ -25,4 +28,4 @@ import { LogincallbackComponent } from './login-callback/login-callback.componen
     }
   ]
 })
-export class CommonModule { }
+export class SharedModule { }

@@ -42,7 +42,8 @@ export class ResourceDetailsComponent implements OnInit, OnChanges {
       data: {
         CollectionId: this.collectionId,
         ResourceId: this.resourceId
-      }
+      },
+      width: '600px'
     });
   }
 }

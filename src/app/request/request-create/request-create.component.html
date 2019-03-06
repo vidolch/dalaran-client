@@ -4,16 +4,37 @@
       <mat-form-field class="name-control">
         <input matInput placeholder="Name" value="" name="name" [(ngModel)]="request.name">
       </mat-form-field>
-      <mat-form-field class="template-control">
-        <input matInput placeholder="Template" value="" name="template" [(ngModel)]="request.template">
-      </mat-form-field>
       <mat-form-field class="http-method-control">
         <mat-select placeholder="HTTP Method" [(value)]="request.http_method">
-          <mat-option *ngFor="let method of httpMethods" [value]="method.key">
+          <mat-option *ngFor="let method of httoMethods | keys" [value]="method.key">
             {{method.value}}
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-form-field class="response-type-control">
+        <mat-select placeholder="Response Type" [(value)]="request.response_type">
+          <mat-option *ngFor="let method of responseTypes | keys" [value]="method.key">
+            {{method.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="response-code-control">
+        <mat-select placeholder="Response Code" [(value)]="request.response_code">
+          <mat-option *ngFor="let method of httpStatusCodes | keys" [value]="method.key">
+            {{method.key}} - {{method.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="template-control" *ngIf="request.response_type">
+        <td-code-editor
+          style="height: 300px"
+          flex
+          language="{{request.response_type == null ? 'json' : request.response_type.toLowerCase()}}"
+          automaticLayout
+          [(ngModel)]="request.template"
+          name="template">
+        </td-code-editor>
+      </div>
     </form>
 </div>
 <div mat-dialog-actions>  

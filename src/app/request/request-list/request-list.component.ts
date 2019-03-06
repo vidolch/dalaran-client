@@ -55,7 +55,8 @@ export class RequestListComponent implements OnChanges, OnInit {
         ResourceId: this.resourceId,
         CollectionId: this.collectionId,
         Id: id
-      }
+      },
+      width: '600px'
     });
   }
 
@@ -65,7 +66,8 @@ export class RequestListComponent implements OnChanges, OnInit {
         ResourceId: this.resourceId,
         CollectionId: this.collectionId,
         Id: id
-      }
+      },
+      width: '600px'
     });
   }
 }

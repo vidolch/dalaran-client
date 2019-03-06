@@ -1,4 +1,3 @@
-import { CommonModule } from './common/common.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -16,6 +15,8 @@ import { AuthModule } from './auth/auth.module';
 import { CollectionModule } from './collection/collection.module';
 import { ResourceModule } from './resource/resource.module';
 import { RequestModule } from './request/request.module';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { RequestModule } from './request/request.module';
     AuthModule,
     CollectionModule,
     ResourceModule,
-    RequestModule
+    RequestModule,
+    SharedModule
   ],
   providers: [
     CookieService,

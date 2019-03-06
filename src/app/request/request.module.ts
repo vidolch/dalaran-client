@@ -6,6 +6,8 @@ import { RequestListComponent } from './request-list/request-list.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
 import { RequestCreateComponent } from './request-create/request-create.component';
 import { RequestService } from './request.service';
+import { SharedModule } from '../shared/shared.module';
+import { CovalentCodeEditorModule } from '@covalent/code-editor';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { RequestService } from './request.service';
   imports: [
     BrowserModule,
     MaterialUimoduleModule,
-    FormsModule
+    FormsModule,
+    SharedModule,
+    CovalentCodeEditorModule
   ],
   exports: [
     RequestListComponent

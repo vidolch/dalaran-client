@@ -1,10 +1,14 @@
-import { HttpMethod } from './HttpMethod';
+import { HttpMethod } from './http-method';
+import { HttpStatusCode } from './http-status-code';
+import { ResponseType } from './response-type';
 
 export class Request {
     id: string;
     name: string;
     template: string;
     http_method: HttpMethod;
+    response_type: ResponseType;
+    response_code: HttpStatusCode;
 
     resource_id: string;
 

@@ -1,7 +1,9 @@
+import { HttpStatusCode } from './../http-status-code';
+import { ResponseType } from './../response-type';
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Request } from '../request';
-import { HttpMethod } from '../HttpMethod';
+import { HttpMethod } from '../http-method';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 interface RequestCreateData {
@@ -18,7 +20,9 @@ interface RequestCreateData {
 export class RequestCreateComponent {
   request = new Request();
   isUpdate = false;
-  httpMethods = [];
+  httoMethods = HttpMethod;
+  responseTypes = ResponseType;
+  httpStatusCodes = HttpStatusCode;
 
   constructor(
     private service: RequestService,
@@ -30,12 +34,6 @@ export class RequestCreateComponent {
 
       if (data.Id) {
         this.selectForEdit(data.Id);
-      }
-    }
-
-    for (const enumMember in HttpMethod) {
-      if (HttpMethod[enumMember] != null) {
-        this.httpMethods.push({key: enumMember, value: HttpMethod[enumMember]});
       }
     }
   }
