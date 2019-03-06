@@ -4,6 +4,11 @@
       <mat-form-field class="name-control">
         <input matInput placeholder="Name" value="" name="name" [(ngModel)]="request.name">
       </mat-form-field>
+
+      <mat-form-field class="name-control">
+        <input matInput placeholder="Path (optional)" value="" name="path" [(ngModel)]="request.path">
+      </mat-form-field>
+
       <mat-form-field class="http-method-control">
         <mat-select placeholder="HTTP Method" [(value)]="request.http_method">
           <mat-option *ngFor="let method of httoMethods | keys" [value]="method.key">
@@ -11,6 +16,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
       <mat-form-field class="response-type-control">
         <mat-select placeholder="Response Type" [(value)]="request.response_type">
           <mat-option *ngFor="let method of responseTypes | keys" [value]="method.key">
@@ -18,6 +24,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
       <mat-form-field class="response-code-control">
         <mat-select placeholder="Response Code" [(value)]="request.response_code">
           <mat-option *ngFor="let method of httpStatusCodes | keys" [value]="method.key">
@@ -25,6 +32,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
       <div class="template-control" *ngIf="request.response_type">
         <td-code-editor
           style="height: 300px"
