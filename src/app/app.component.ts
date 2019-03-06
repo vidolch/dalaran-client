@@ -22,6 +22,6 @@ export class AppComponent {
   }
 
   public get username() {
-      return this.authService.isLoggedIn() ? this.authService.getClaims()['preferred_username'] : null;
+      return this.authService.isLoggedIn() ? this.authService.getClaims()["preferred_username"] : null;
   }
 }

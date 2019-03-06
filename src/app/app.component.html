@@ -6,10 +6,10 @@
     </a>
 
     <div class="user-controls">
-      <button mat-button [matMenuTriggerFor]="menu">{{!!name ? name : "Profile"}}</button>
+      <button mat-button [matMenuTriggerFor]="menu">{{!!username ? username : "Profile"}}</button>
       <mat-menu #menu="matMenu">      
         <button *ngIf="username" mat-menu-item>
-          {{name}}
+          {{username}}
         </button>
   
         <button *ngIf="username" mat-menu-item (click)="logout()">
