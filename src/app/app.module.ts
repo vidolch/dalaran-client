@@ -8,7 +8,6 @@ import { MaterialUimoduleModule } from './material-uimodule.module';
 
 import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthModule } from './auth/auth.module';
@@ -32,7 +31,6 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     MaterialUimoduleModule,
     HttpClientModule,
-    FormsModule,
     CommonModule,
     AuthModule,
     CollectionModule,

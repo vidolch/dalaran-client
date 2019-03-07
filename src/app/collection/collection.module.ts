@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { ResourceModule } from './../resource/resource.module';
 
 import { CollectionComponent } from './collection.component';
@@ -9,6 +8,7 @@ import { CollectionDetailsComponent } from './collection-details/collection-deta
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialUimoduleModule } from '../material-uimodule.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { MaterialUimoduleModule } from '../material-uimodule.module';
     BrowserModule,
     ResourceModule,
     MaterialUimoduleModule,
-    FormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     CollectionService

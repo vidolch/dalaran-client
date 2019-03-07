@@ -1,16 +1,16 @@
 <h2 mat-dialog-title>Create new Request</h2>
 <div mat-dialog-content>
-  <form class="new-request-form">
+  <form class="new-request-form" [formGroup]="requestForm">
       <mat-form-field class="name-control">
-        <input matInput placeholder="Name" value="" name="name" [(ngModel)]="request.name">
+        <input matInput placeholder="Name" value="" name="name" formControlName="name">
       </mat-form-field>
 
       <mat-form-field class="name-control">
-        <input matInput placeholder="Path (optional)" value="" name="path" [(ngModel)]="request.path">
+        <input matInput placeholder="Path (optional)" value="" name="path" formControlName="path">
       </mat-form-field>
 
       <mat-form-field class="http-method-control">
-        <mat-select placeholder="HTTP Method" [(value)]="request.http_method">
+        <mat-select placeholder="HTTP Method" formControlName="http_method">
           <mat-option *ngFor="let method of httoMethods | keys" [value]="method.key">
             {{method.value}}
           </mat-option>
@@ -18,7 +18,7 @@
       </mat-form-field>
 
       <mat-form-field class="response-type-control">
-        <mat-select placeholder="Response Type" [(value)]="request.response_type">
+        <mat-select placeholder="Response Type" formControlName="response_type">
           <mat-option *ngFor="let method of responseTypes | keys" [value]="method.key">
             {{method.value}}
           </mat-option>
@@ -26,27 +26,27 @@
       </mat-form-field>
 
       <mat-form-field class="response-code-control">
-        <mat-select placeholder="Response Code" [(value)]="request.response_code">
+        <mat-select placeholder="Response Code" formControlName="response_code">
           <mat-option *ngFor="let method of httpStatusCodes | keys" [value]="method.key">
             {{method.key}} - {{method.value}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <div class="template-control" *ngIf="request.response_type">
+      <div class="template-control" *ngIf="requestForm.value.response_type">
         <td-code-editor
           style="height: 300px"
           flex
-          language="{{request.response_type == null ? 'json' : request.response_type.toLowerCase()}}"
+          language="{{requestForm.value.response_type == null ? 'json' : requestForm.value.response_type.toLowerCase()}}"
           automaticLayout
-          [(ngModel)]="request.template"
+          formControlName="template"
           name="template">
         </td-code-editor>
       </div>
     </form>
 </div>
 <div mat-dialog-actions>  
-    <button matInput mat-raised-button color="primary" (click)="submitRequest()">
+    <button matInput mat-raised-button color="primary" (click)="submitRequest()" [disabled]="!requestForm.valid">
         {{ this.isUpdate ? 'Update' : 'Create' }}
     </button>
   <button matInput mat-raised-button [mat-dialog-close]>

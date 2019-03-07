@@ -1,13 +1,13 @@
 <h2 mat-dialog-title>Create new Collection</h2>
 <div mat-dialog-content>
-    <form class="new-collection-form">
+    <form class="new-collection-form" [formGroup]="collectionForm">
         <mat-form-field class="name-control">
-            <input matInput placeholder="Name" value="" name="name" [(ngModel)]="collection.name">
+            <input matInput placeholder="Name" value="" name="name" formControlName="name">
         </mat-form-field>
     </form>
 </div>
 <div mat-dialog-actions>  
-  <button matInput mat-raised-button color="primary" (click)="submitCollection()">
+  <button matInput mat-raised-button color="primary" (click)="submitCollection()" [disabled]="!collectionForm.valid">
       {{ this.isUpdate ? 'Update' : 'Create' }}
   </button>
   <button matInput mat-raised-button [mat-dialog-close]>

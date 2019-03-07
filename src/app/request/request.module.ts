@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialUimoduleModule } from './../material-uimodule.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -19,9 +19,9 @@ import { CovalentCodeEditorModule } from '@covalent/code-editor';
   imports: [
     BrowserModule,
     MaterialUimoduleModule,
-    FormsModule,
     SharedModule,
-    CovalentCodeEditorModule
+    CovalentCodeEditorModule,
+    ReactiveFormsModule,
   ],
   exports: [
     RequestListComponent

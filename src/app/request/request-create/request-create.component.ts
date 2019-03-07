@@ -5,6 +5,7 @@ import { RequestService } from '../request.service';
 import { Request } from '../request';
 import { HttpMethod } from '../http-method';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormBuilder, Validators } from '@angular/forms';
 
 interface RequestCreateData {
   CollectionId: string;
@@ -18,7 +19,19 @@ interface RequestCreateData {
   styleUrls: ['./request-create.component.css']
 })
 export class RequestCreateComponent {
-  request = new Request();
+  requestForm = this.fb.group({
+    id: [null],
+    name: ['', Validators.required],
+    path: [''],
+    template: ['', Validators.required],
+    http_method: ['', Validators.required],
+    response_type: ['', Validators.required],
+    response_code: ['', Validators.required],
+    resource_id: ['', Validators.required],
+    created_timestamp: [null],
+    updated_timestamp: [null],
+  });
+
   isUpdate = false;
   httoMethods = HttpMethod;
   responseTypes = ResponseType;
@@ -27,6 +40,7 @@ export class RequestCreateComponent {
   constructor(
     private service: RequestService,
     public dialogRef: MatDialogRef<RequestCreateComponent>,
+    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: RequestCreateData) {
     if (data) {
       this.service.collectionId = data.CollectionId;
@@ -34,19 +48,22 @@ export class RequestCreateComponent {
 
       if (data.Id) {
         this.selectForEdit(data.Id);
+      } else {
+        this.requestForm.patchValue({
+          ...this.requestForm.value,
+          resource_id: data.ResourceId
+        });
       }
     }
   }
 
   submitRequest() {
     if (!this.isUpdate) {
-      this.service.create(this.request).subscribe(model => {
-        this.request = new Request();
+      this.service.create(this.requestForm.value).subscribe(model => {
         this.service.requestsCreated();
       });
     } else {
-      this.service.update(this.request.id, this.request).subscribe(model => {
-        this.request = new Request();
+      this.service.update(this.requestForm.value.id, this.requestForm.value).subscribe(model => {
         this.service.requestsCreated();
       });
       this.isUpdate = false;
@@ -57,7 +74,9 @@ export class RequestCreateComponent {
   private selectForEdit(id: string): any {
     this.service.getOne(id)
       .subscribe(model => {
-        this.request = model;
+        this.requestForm.patchValue({
+          ...model
+        });
         this.isUpdate = true;
       });
   }

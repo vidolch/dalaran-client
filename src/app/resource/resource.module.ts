@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ResourceListComponent } from './resource-list/resource-list.component';
 import { ResourceService } from './resource.service';
@@ -18,8 +18,8 @@ import { RequestModule } from '../request/request.module';
   imports: [
     BrowserModule,
     MaterialUimoduleModule,
-    FormsModule,
-    RequestModule
+    RequestModule,
+    ReactiveFormsModule,
   ],
   exports: [
     ResourceDetailsComponent,

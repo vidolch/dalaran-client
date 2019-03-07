@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Resource } from '../Resource';
 import { ResourceService } from '../resource.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { FormBuilder, Validators } from '@angular/forms';
 
 interface ResourceCreateData {
   CollectionId: string;
@@ -14,31 +15,43 @@ interface ResourceCreateData {
   styleUrls: ['./resource-create.component.css']
 })
 export class ResourceCreateComponent {
-  resource = new Resource();
+  resourceForm = this.fb.group({
+    id: [null],
+    name: ['', Validators.required],
+    path: ['', Validators.required],
+    collection_id: ['', Validators.required],
+    created_timestamp: [null],
+    updated_timestamp: [null],
+
+  });
   isUpdate = false;
 
   constructor(
     private service: ResourceService,
     public dialogRef: MatDialogRef<ResourceCreateComponent>,
+    private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: ResourceCreateData) {
     if (data) {
       this.service.collectionId = data.CollectionId;
 
       if (data.Id) {
         this.selectForEdit(data.Id);
+      } else {
+        this.resourceForm.patchValue({
+          ...this.resourceForm.value,
+          collection_id: data.CollectionId
+        });
       }
     }
   }
 
   submitResource() {
     if (!this.isUpdate) {
-      this.service.create(this.resource).subscribe(model => {
-        this.resource = new Resource();
+      this.service.create(this.resourceForm.value).subscribe(model => {
         this.service.resourceCreated();
       });
     } else {
-      this.service.update(this.resource.id, this.resource).subscribe(model => {
-        this.resource = new Resource();
+      this.service.update(this.resourceForm.value.id, this.resourceForm.value).subscribe(model => {
         this.service.resourceCreated();
       });
       this.isUpdate = false;
@@ -49,7 +62,9 @@ export class ResourceCreateComponent {
   private selectForEdit(id: string): any {
     this.service.getOne(id)
       .subscribe(model => {
-        this.resource = model;
+        this.resourceForm.patchValue({
+          ...model
+        });
         this.isUpdate = true;
       });
   }
